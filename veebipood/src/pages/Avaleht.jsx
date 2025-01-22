@@ -12,12 +12,38 @@ import { useState } from 'react'
 function Avaleht() {
   const [count, setCount] = useState(0)
   const [laigitud, setLaigitud] = useState(false);
+  const [sonum, setSonum] = useState("");
+
+  function nulli() { // vähem märke
+    setCount(0);
+    setSonum("Kogus nullitud");
+    setLaigitud(false);
+  }
+
+  // const nulli = () => { // kõik mis ma loon, on const
+    // setCount(0);
+    // setSonum("Kogus nullitud");
+    // setLaigitud(false);
+  // }
+
+  function vahenda() {
+    setCount(count - 1);
+    setSonum("Kogus vähendatud");
+  }
+
+  function suurenda() {
+    setCount(count + 1);
+    setSonum("Kogus suurendatud");
+  }
 
   return (
     <div>
-      <button className="nupp" onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
+      <div>{sonum}</div>
+      {count > 0 && <button onClick={nulli}>Nulli</button>}
+      <br />
+      <button disabled={count === 0} onClick={vahenda}>-</button>
+      <span>count is {count}</span>
+      <button onClick={suurenda}>+</button>
       <br />
       {laigitud === true && <img src="/laigitud.svg" alt="" />}
       {laigitud === false && <img src="/mittelaigitud.svg" alt="" />}

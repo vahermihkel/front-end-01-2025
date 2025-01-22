@@ -9,12 +9,19 @@ import NotFound from './pages/NotFound'
 import Esindused from './pages/Esindused'
 import Menu from './components/Menu'
 import Kalkulaator from './pages/Kalkulaator'
+import { useState } from 'react'
 
 function App() {
+  const [tume, setTume] = useState(false);
 
+  // ? :
+  // KAS_TÕSI ? KUI_ON : KUI_POLE
+  // if(tume===true) {"dark"} else {"light"}
   return (
-    <>
+    <div className={tume === true ? "dark" : "light"}>
         <Menu />
+        <button onClick={() => setTume(true)}>Tume</button>
+        <button onClick={() => setTume(false)}>Hele</button>
         <br />
         
         
@@ -37,7 +44,7 @@ function App() {
           <Route path="/kalkulaator" element={ <Kalkulaator /> } />
           <Route path="*" element={<NotFound /> } />
         </Routes>
-    </>
+    </div>
   )
 }
 
@@ -46,3 +53,5 @@ export default App
 // 1. uue projekti tekitamine HTML, CSS
 // 2. routing, Link, brauseri ikoon ja kiri
 // 3. useState, componendid
+// 4. kalkulaator. värvid. Firebase. dünaamiline CSS.
+// 5. dünaamiline CSS, function, useRef, laenu/maks kalkulaator
