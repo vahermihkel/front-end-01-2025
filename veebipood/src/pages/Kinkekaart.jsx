@@ -1,35 +1,82 @@
 import { useRef, useState } from "react"
+import KinkekaartEmail from "../components/KinkekaartEmail";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Kinkekaart() {
   const [summa, setSumma] = useState(20);
   const [kogus, setKogus] = useState(1);
-  const emailRef = useRef(); // peame sisestama inputi sisse
-  const [sonum, setSonum] = useState("");
+  const valimiseRef = useRef();
+  
+  const [summaValimine, setSummaValimine] = useState(false);
+  const [kirjutatudSumma, setKirjutatudSumma] = useState(0);
+  const [kirjutatudSummaAktiivne, setKirjutatudSummaAktiivne] = useState(false);
 
-  function lisa() { // olla onClickiga väljakutsutav
-    if (emailRef.current.value === "") {
-      setSonum("E-mail peab olema sisestatud");
-      return; // lõpetab funktsiooni, siit enam edasi ei minda
+  const summa20 = () => {
+    setSumma(20);
+    setSummaValimine(false);
+    setKirjutatudSummaAktiivne(false);
+  }
+ 
+  const summa50 = () => {
+    setSumma(50);
+    setSummaValimine(false);
+    setKirjutatudSummaAktiivne(false);
+  }
+
+  const summa100 = () => {
+    setSumma(100);
+    setSummaValimine(false);
+    setKirjutatudSummaAktiivne(false);
+  }
+
+  const summa0 = () => {
+    setSumma(0);
+    setSummaValimine(true);
+  }
+
+  const summaValik = () => {
+    if (valimiseRef.current.value > 2000) {
+      toast("Kinkekaardi summa peab olema vahemikus 15 ja 2000!");
+      setSumma(2000);
+    } else if (valimiseRef.current.value < 15) {
+      toast("Kinkekaardi summa peab olema vahemikus 15 ja 2000!");
+      setSumma(15);
+    } else {
+      setSumma(valimiseRef.current.value);
     }
-
-    if (emailRef.current.value.includes("@") === false) {
-      setSonum("E-mail peab sisaldama @ märki");
-      return; // lõpetab funktsiooni, siit enam edasi ei minda
-    } 
-    
-    if (emailRef.current.value.length < 5) {
-      setSonum("E-mail liiga lühike");
-      return; // lõpetab funktsiooni, siit enam edasi ei minda
-    } 
-
-    setSonum("E-mail sisestatud");
+    setSummaValimine(false);
+    setKirjutatudSumma(valimiseRef.current.value);
+    setKirjutatudSummaAktiivne(true);
   }
 
   return (
     <div>
-      <button className={summa === 20 ? "valitud" : undefined} onClick={() => setSumma(20)}>20 €</button>
-      <button className={summa === 50 ? "valitud" : undefined} onClick={() => setSumma(50)}>50 €</button>
-      <button className={summa === 100 ? "valitud" : undefined} onClick={() => setSumma(100)}>100 €</button>
+      <span className="summa-buttons">
+        <button className={summa === 20 ? "valitud" : undefined} onClick={summa20}>20 €</button>
+        <button className={summa === 50 ? "valitud" : undefined} onClick={summa50}>50 €</button>
+        <button className={summa === 100 ? "valitud" : undefined} onClick={summa100}>100 €</button>
+        <span className={summaValimine ? "valitud vali-summa" : "vali-summa"}>
+          
+          {summaValimine === false && kirjutatudSummaAktiivne === false &&
+          <span onClick={summa0}>
+            <img className="pliiats" src="/edit.png" alt="" />
+            <span className="vali-summa-tekst">Valin ise summa</span>
+          </span>}
+          
+          {summaValimine === true &&
+          <>
+            <input defaultValue={kirjutatudSumma} ref={valimiseRef} type="text" />
+            <img onClick={summaValik} className="pliiats" src="/next.png" alt="" />
+          </>}
+          
+          {summaValimine === false && kirjutatudSumma > 0 &&  kirjutatudSummaAktiivne === true &&
+          <span onClick={summa0}>
+            {kirjutatudSumma}
+          </span>}
+
+        </span>
+      </span>
       <br />
       <div>Kinkekaart {summa}€</div>
       <br /><br /><br />
@@ -39,10 +86,12 @@ function Kinkekaart() {
       <br /><br />
       <div>Kokku: {summa * kogus} €</div>
       <br /><br />
-      <div>{sonum}</div>
-      <label>Email</label><br />
-      <input ref={emailRef} type="text" /><br />
-      <button onClick={lisa}>Sisesta email</button> <br />
+      <KinkekaartEmail />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        theme="dark"
+      />
     </div>
   )
 }

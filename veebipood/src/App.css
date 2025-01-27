@@ -39,8 +39,8 @@
 }
 
 .valitud {
-  color: rgb(227 6 140);
-  border-color: rgb(227 6 140);
+  color: rgb(227 6 140) !important;
+  border-color: rgb(227 6 140) !important;
 }
 
 .valitud-linn {
@@ -63,4 +63,45 @@
   background-color: white;
   color: black;
   min-height: 100vh;
+}
+
+.light button,
+.light .vali-summa {
+  background-color: black;
+  color: white;
+}
+
+.pliiats {
+  width: 20px;
+  height: 20px;
+}
+
+.menu {
+  display: flex;
+}
+
+/* .menu-buttons {
+  position: relative;
+  top: -85px;
+  width: calc(100vw - 200px);
+} */
+
+.theme-buttons {
+  float: left;
+}
+
+.summa-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 20%;
+  gap: 5px;
+}
+
+.summa-buttons button {
+  height: 70px;
+}
+
+.vali-summa {
+  display: flex;
+  place-items: center;
 }

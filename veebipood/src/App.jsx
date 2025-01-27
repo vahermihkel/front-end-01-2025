@@ -20,9 +20,11 @@ function App() {
   return (
     <div className={tume === true ? "dark" : "light"}>
         <Menu />
-        <button onClick={() => setTume(true)}>Tume</button>
-        <button onClick={() => setTume(false)}>Hele</button>
-        <br />
+        <span className="theme-buttons">
+          <button onClick={() => setTume(true)}>Tume</button>
+          <button onClick={() => setTume(false)}>Hele</button>
+        </span>
+        <br /><br /><br />
         
         
         {/* <div className="tekst">Kõik meie tooted</div> */}
@@ -55,3 +57,5 @@ export default App
 // 3. useState, componendid
 // 4. kalkulaator. värvid. Firebase. dünaamiline CSS.
 // 5. dünaamiline CSS, function, useRef, laenu/maks kalkulaator
+// 6. Toastify. CSS: grid, flex, important. tume/hele, menüü liigutamine. 
+// emaili välja tõstmine. summa ise sisestamine.
