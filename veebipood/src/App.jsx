@@ -6,10 +6,16 @@ import Kinkekaart from './pages/Kinkekaart'
 import LisaToode from './pages/LisaToode'
 import Seaded from './pages/Seaded'
 import NotFound from './pages/NotFound'
-import Esindused from './pages/Esindused'
+import Esindused from './pages/arrays/Esindused'
 import Menu from './components/Menu'
 import Kalkulaator from './pages/Kalkulaator'
 import { useState } from 'react'
+import Hinnad from './pages/arrays/Hinnad'
+import Kasutajad from './pages/arrays/Kasutajad'
+import Pildid from './pages/arrays/Pildid'
+import Tootajad from './pages/arrays/Tootajad'
+import Tooted from './pages/arrays/Tooted'
+import ArraysHome from './pages/arrays/ArraysHome'
 
 function App() {
   const [tume, setTume] = useState(false);
@@ -42,8 +48,16 @@ function App() {
           <Route path="/osta-kinkekaart" element={ <Kinkekaart /> } />
           <Route path="/lisa-toode" element={ <LisaToode /> } />
           <Route path="/seaded" element={ <Seaded /> } />
-          <Route path="/esindused" element={ <Esindused /> } />
           <Route path="/kalkulaator" element={ <Kalkulaator /> } />
+
+          <Route path="/arrays" element={ <ArraysHome /> } />
+          <Route path="/esindused" element={ <Esindused /> } />
+          <Route path="/hinnad" element={ <Hinnad /> } />
+          <Route path="/kasutajad" element={ <Kasutajad /> } />
+          <Route path="/pildid" element={ <Pildid /> } />
+          <Route path="/tootajad" element={ <Tootajad /> } />
+          <Route path="/tooted" element={ <Tooted /> } />
+
           <Route path="*" element={<NotFound /> } />
         </Routes>
     </div>
@@ -59,3 +73,12 @@ export default App
 // 5. dünaamiline CSS, function, useRef, laenu/maks kalkulaator
 // 6. Toastify. CSS: grid, flex, important. tume/hele, menüü liigutamine. 
 // emaili välja tõstmine. summa ise sisestamine.
+// 7. 29.01 arrays
+// 8. 04.02 - 14.00-17.15
+// 9. 05.02
+// x. 10.02
+// x. 12.02
+// 10.17.02
+// x. 19.02
+// x. 24.02
+// 11.26.02
